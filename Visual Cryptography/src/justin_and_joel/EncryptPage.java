@@ -101,20 +101,46 @@ public class EncryptPage extends JFrame {
 
 				 if (ret==0) {
 
-				 File file = openFile.getSelectedFile();
+					 File file = openFile.getSelectedFile();
 
-				 String filename = file.getName();
+					 String filename = file.getName();
 
-				 Main.path = filename;
+					 Main.path = filename;
 
-				 System.out.println(filename);
-			}
+					 System.out.println(filename);
+				 }
+				 else{
+					 System.out.println("Error selecting file");
+				 }
 			}
 		});
 		btnOriginal.setBounds(12, 66, 117, 25);
 		contentPane.add(btnOriginal);
 		
 		btnModified = new JButton("Modified");
+		btnModified.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser openFile = new JFileChooser();
+
+				 int ret = openFile.showOpenDialog(null);
+
+				 System.out.println(ret);
+
+				 if (ret==0) {
+
+					 File file = openFile.getSelectedFile();
+
+					 String filename = file.getName();
+
+					 Main.save_path = filename;
+
+					 System.out.println(filename);
+				 }
+				 else{
+					 System.out.println("Error selecting save file");
+				 }
+			}
+		});
 		btnModified.setBounds(12, 100, 117, 25);
 		contentPane.add(btnModified);
 		
