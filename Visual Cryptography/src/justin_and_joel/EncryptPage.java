@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 public class EncryptPage extends JFrame {
 	
@@ -89,6 +91,26 @@ public class EncryptPage extends JFrame {
 		contentPane.add(rdbtnText);
 		
 		btnOriginal = new JButton("Original");
+		btnOriginal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser openFile = new JFileChooser();
+
+				 int ret = openFile.showOpenDialog(null);
+
+				 System.out.println(ret);
+
+				 if (ret==0) {
+
+				 File file = openFile.getSelectedFile();
+
+				 String filename = file.getName();
+
+				 Main.path = filename;
+
+				 System.out.println(filename);
+			}
+			}
+		});
 		btnOriginal.setBounds(12, 66, 117, 25);
 		contentPane.add(btnOriginal);
 		

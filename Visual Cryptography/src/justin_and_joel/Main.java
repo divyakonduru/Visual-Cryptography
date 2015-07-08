@@ -5,6 +5,11 @@ public class Main {
 	/**
 	 * @param args
 	 */
+	
+	static String path; //Holds current file path
+
+	static String save_path; // Saved file path
+	
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 		System.out.println("Hello World again");
