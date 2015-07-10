@@ -93,25 +93,31 @@ public class EncryptPage extends JFrame {
 		btnOriginal = new JButton("Original");
 		btnOriginal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-
-				 int ret = openFile.showOpenDialog(null);
-
-				 System.out.println(ret);
-
-				 if (ret==0) {
-
-					 File file = openFile.getSelectedFile();
-
-					 String filename = file.getName();
-
-					 Main.path = filename;
-
-					 System.out.println(filename);
-				 }
-				 else{
-					 System.out.println("Error selecting file");
-				 }
+				if(imageFlag == false){
+					System.out.println("Select image radio button");
+					return;
+				}
+				else{
+					JFileChooser openFile = new JFileChooser();
+	
+					 int ret = openFile.showOpenDialog(null);
+	
+					 System.out.println(ret);
+	
+					 if (ret==0) {
+	
+						 File file = openFile.getSelectedFile();
+	
+						 String filename = file.getName();
+	
+						 Main.path = filename;
+	
+						 System.out.println(filename);
+					 }
+					 else{
+						 System.out.println("Error selecting file");
+					 }
+				}
 			}
 		});
 		btnOriginal.setBounds(12, 66, 117, 25);
@@ -120,25 +126,31 @@ public class EncryptPage extends JFrame {
 		btnModified = new JButton("Modified");
 		btnModified.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-
-				 int ret = openFile.showOpenDialog(null);
-
-				 System.out.println(ret);
-
-				 if (ret==0) {
-
-					 File file = openFile.getSelectedFile();
-
-					 String filename = file.getName();
-
-					 Main.save_path = filename;
-
-					 System.out.println(filename);
-				 }
-				 else{
-					 System.out.println("Error selecting save file");
-				 }
+				if(imageFlag == false){
+					System.out.println("Select image radio button");
+					return;
+				}
+				else{
+					JFileChooser openFile = new JFileChooser();
+	
+					 int ret = openFile.showOpenDialog(null);
+	
+					 System.out.println(ret);
+	
+					 if (ret==0) {
+	
+						 File file = openFile.getSelectedFile();
+	
+						 String filename = file.getName();
+	
+						 Main.save_path = filename;
+	
+						 System.out.println(filename);
+					 }
+					 else{
+						 System.out.println("Error selecting save file");
+					 }
+				}
 			}
 		});
 		btnModified.setBounds(12, 100, 117, 25);
@@ -158,8 +170,12 @@ public class EncryptPage extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String text = textArea.getText();
-				if(imageFlag == false && !text.equals("")){
-					System.out.println("Works");
+				if(imageFlag == false && text.equals("")){
+					System.out.println("Enter some text");
+					
+				}
+				else if(imageFlag == false && !text.equals("")){
+					//Add function to convert text to image
 					
 				}
 				else if(imageFlag == true){
