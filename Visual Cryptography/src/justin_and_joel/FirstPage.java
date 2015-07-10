@@ -13,6 +13,10 @@ import java.awt.event.MouseEvent;
 
 public class FirstPage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -58,6 +62,12 @@ public class FirstPage extends JFrame {
 			contentPane.add(btnEncrypt);
 			
 			JButton btnDecrypt = new JButton("Decrypt");
+			btnDecrypt.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					DecryptPage.main(null);
+				}
+			});
 			btnDecrypt.setBounds(160, 140, 150, 25);
 			contentPane.add(btnDecrypt);
 		}
