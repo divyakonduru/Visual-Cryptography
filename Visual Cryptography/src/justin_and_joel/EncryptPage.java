@@ -102,38 +102,10 @@ public class EncryptPage extends JFrame {
 					return;
 				}
 				else{
-					JFileChooser openFile = new JFileChooser();
-	
-					 int ret = openFile.showOpenDialog(null);
-	
-					 System.out.println(ret);
-	
-					 if (ret==0) {
-	
-						 File file = openFile.getSelectedFile();
-	
-						 String filename = file.getAbsolutePath();
-	
-						 Main.path = filename;
-	
-						 System.out.println(filename);
-						 
-						 BufferedImage test_image = null;
-							try {
-								test_image = ImageIO.read(new File(filename));
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-							JLabel test = new JLabel(new ImageIcon(test_image));
-							JFrame sample = new JFrame();
-							sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-							sample.getContentPane().add(test);
-							sample.pack();sample.setLocation(600,50);
-							sample.setVisible(true);
-					 }
-					 else{
-						 System.out.println("Error selecting file");
-					 }
+					
+					Main.path = ImageFunctions.GetPathName();
+					
+					ImageFunctions.Display(Main.path);
 				}
 			}
 		});
@@ -148,25 +120,9 @@ public class EncryptPage extends JFrame {
 					return;
 				}
 				else{
-					JFileChooser openFile = new JFileChooser();
-	
-					 int ret = openFile.showOpenDialog(null);
-	
-					 System.out.println(ret);
-	
-					 if (ret==0) {
-	
-						 File file = openFile.getSelectedFile();
-	
-						 String filename = file.getName();
-	
-						 Main.save_path = filename;
-	
-						 System.out.println(filename);
-					 }
-					 else{
-						 System.out.println("Error selecting save file");
-					 }
+					Main.path = ImageFunctions.GetPathName();
+					
+					ImageFunctions.Display(Main.path);
 				}
 			}
 		});
@@ -207,22 +163,9 @@ public class EncryptPage extends JFrame {
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
 		
-		/* Load test image for debugging 
-		BufferedImage test_image = null;
-		try {
-			test_image = ImageIO.read(new File(filename));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		JLabel test = new JLabel(new ImageIcon(test_image));
-		JFrame sample = new JFrame();
-		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		sample.getContentPane().add(test);
-		sample.pack();sample.setLocation(600,50);
-		sample.setVisible(true);*/
-		
 		
 		
 	}
+	
 	
 }
