@@ -112,11 +112,24 @@ public class EncryptPage extends JFrame {
 	
 						 File file = openFile.getSelectedFile();
 	
-						 String filename = file.getName();
+						 String filename = file.getAbsolutePath();
 	
 						 Main.path = filename;
 	
 						 System.out.println(filename);
+						 
+						 BufferedImage test_image = null;
+							try {
+								test_image = ImageIO.read(new File(filename));
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+							JLabel test = new JLabel(new ImageIcon(test_image));
+							JFrame sample = new JFrame();
+							sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+							sample.getContentPane().add(test);
+							sample.pack();sample.setLocation(600,50);
+							sample.setVisible(true);
 					 }
 					 else{
 						 System.out.println("Error selecting file");
@@ -194,10 +207,10 @@ public class EncryptPage extends JFrame {
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
 		
-		/* Load test image for debugging */
+		/* Load test image for debugging 
 		BufferedImage test_image = null;
 		try {
-			test_image = ImageIO.read(new File("test_image.png"));
+			test_image = ImageIO.read(new File(filename));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -206,7 +219,7 @@ public class EncryptPage extends JFrame {
 		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		sample.getContentPane().add(test);
 		sample.pack();sample.setLocation(600,50);
-		sample.setVisible(true);
+		sample.setVisible(true);*/
 		
 		
 		
