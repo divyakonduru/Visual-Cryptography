@@ -3,10 +3,12 @@ package justin_and_joel;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -18,7 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class EncryptPage extends JFrame {
 	
@@ -189,6 +193,23 @@ public class EncryptPage extends JFrame {
 		btnClear = new JButton("Clear");
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
+		
+		/* Load test image for debugging */
+		BufferedImage test_image = null;
+		try {
+			test_image = ImageIO.read(new File("test_image.png"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JLabel test = new JLabel(new ImageIcon(test_image));
+		JFrame sample = new JFrame();
+		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		sample.getContentPane().add(test);
+		sample.pack();sample.setLocation(600,50);
+		sample.setVisible(true);
+		
+		
+		
 	}
 	
 }
