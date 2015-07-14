@@ -105,7 +105,7 @@ public class EncryptPage extends JFrame {
 					
 					Main.path = ImageFunctions.GetPathName();
 					
-					ImageFunctions.Display(Main.path);
+					Main.originalImage = ImageFunctions.Display(Main.path);
 				}
 			}
 		});
@@ -120,9 +120,9 @@ public class EncryptPage extends JFrame {
 					return;
 				}
 				else{
-					Main.path = ImageFunctions.GetPathName();
+					Main.save_path = ImageFunctions.GetPathName();
 					
-					ImageFunctions.Display(Main.path);
+					//ImageFunctions.Display(Main.path);
 				}
 			}
 		});
@@ -153,6 +153,8 @@ public class EncryptPage extends JFrame {
 				}
 				else if(imageFlag == true){
 					//Add function for encrypting
+					ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
+					
 				}
 			}
 		});

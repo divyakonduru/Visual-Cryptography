@@ -1,5 +1,6 @@
 package justin_and_joel;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Main {
@@ -11,6 +12,7 @@ public class Main {
 	static String path; //Holds current file path
 	static String save_path; // Saved file path
 	static File file; //Holds current open file
+	static BufferedImage originalImage;
 	
 	public static void main(String[] args) {
 		System.out.println("Hello World");

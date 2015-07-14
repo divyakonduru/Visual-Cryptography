@@ -1,5 +1,6 @@
 package justin_and_joel;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +54,19 @@ public class ImageFunctions {
 		sample.setVisible(true);
 		
 		return test_image;
+	}
+	
+	public static Graphics2D EncryptImage(String path, BufferedImage image){
+		
+		BufferedImage modify = new BufferedImage(image.getWidth(), image.getHeight(),
+                BufferedImage.TYPE_BYTE_BINARY);
+		
+		Graphics2D bw = modify.createGraphics();
+		bw.drawImage(modify,0,0,null);
+		
+		
+		return bw;
+		
 	}
 	
 }
