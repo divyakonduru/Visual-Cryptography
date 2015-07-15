@@ -2,6 +2,7 @@ package justin_and_joel;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -122,7 +123,7 @@ public class EncryptPage extends JFrame {
 				else{
 					Main.save_path = ImageFunctions.GetPathName();
 					
-					//ImageFunctions.Display(Main.path);
+					
 				}
 			}
 		});
@@ -153,7 +154,10 @@ public class EncryptPage extends JFrame {
 				}
 				else if(imageFlag == true){
 					//Add function for encrypting
-					ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
+					BufferedImage black_white = ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
+					
+					Main.output_file = new File(Main.save_path);
+					ImageFunctions.Save(black_white, Main.output_file);
 					
 				}
 			}

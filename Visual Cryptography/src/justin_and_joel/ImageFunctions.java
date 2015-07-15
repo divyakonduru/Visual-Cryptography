@@ -1,7 +1,9 @@
 package justin_and_joel;
 
+import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,7 +34,9 @@ public class ImageFunctions {
 			 return filename;
 		 }
 		 else{
+			 
 			 System.out.println("Error selecting file");
+			 
 			 return null;
 		 }
 		
@@ -56,14 +60,21 @@ public class ImageFunctions {
 		return test_image;
 	}
 	
-	public static Graphics2D EncryptImage(String path, BufferedImage image){
+	public static BufferedImage Save(BufferedImage black_white, File path){
+		//BufferedImage save_image = null;
+		try {
+			ImageIO.write((RenderedImage) black_white, "png", path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 		
-		BufferedImage modify = new BufferedImage(image.getWidth(), image.getHeight(),
-                BufferedImage.TYPE_BYTE_BINARY);
+	}
+	
+	public static BufferedImage EncryptImage(String path, BufferedImage image){
 		
-		Graphics2D bw = modify.createGraphics();
-		bw.drawImage(modify,0,0,null);
-		
+		//Transform to B/W, encrypt
 		
 		return bw;
 		
