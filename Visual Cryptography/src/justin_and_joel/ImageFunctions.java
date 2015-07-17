@@ -72,6 +72,22 @@ public class ImageFunctions {
 		
 	}
 	
+	public static BufferedImage Magnify(BufferedImage img){
+		
+		BufferedImage magnified_image = new BufferedImage(img.getWidth()*2, img.getHeight()*2, BufferedImage.TYPE_INT_RGB);
+		
+		int midpoint = 16777216/2;
+		
+		for(int i = 0; i < img.getHeight(); i++){
+			for(int j = 0; j < img.getWidth(); j++){
+				if(img.getRGB(j, i) < midpoint){
+					//Add magnification part
+					
+				}
+			}
+		}
+		return img;
+	}
 	
 	//public static BufferedImage EncryptImage(String path, BufferedImage image){
 		
