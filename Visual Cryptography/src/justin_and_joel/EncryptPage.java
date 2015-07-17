@@ -105,8 +105,9 @@ public class EncryptPage extends JFrame {
 				else{
 					
 					Main.path = ImageFunctions.GetPathName();
+					Main.file = new File(Main.path);
 					
-					Main.originalImage = ImageFunctions.Display(Main.path);
+					Main.originalImage = ImageFunctions.Display(Main.file);
 				}
 			}
 		});
@@ -154,10 +155,18 @@ public class EncryptPage extends JFrame {
 				}
 				else if(imageFlag == true){
 					//Add function for encrypting
-					BufferedImage black_white = ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
+					//BufferedImage black_white = ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
+					BufferedImage black_white = new BufferedImage(
+					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
+					        BufferedImage.TYPE_BYTE_BINARY);
+					    
+					Graphics2D graphics = black_white.createGraphics();
+					graphics.drawImage(Main.originalImage, 0, 0, null);
+
 					
 					Main.output_file = new File(Main.save_path);
 					ImageFunctions.Save(black_white, Main.output_file);
+					ImageFunctions.Display(Main.output_file);
 					
 				}
 			}

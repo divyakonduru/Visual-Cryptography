@@ -42,11 +42,11 @@ public class ImageFunctions {
 		
 	}
 
-	public static BufferedImage Display(String path){
+	public static BufferedImage Display(File file){
 		
 		BufferedImage test_image = null;
 		try {
-			test_image = ImageIO.read(new File(path));
+			test_image = ImageIO.read(file);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -72,12 +72,13 @@ public class ImageFunctions {
 		
 	}
 	
-	public static BufferedImage EncryptImage(String path, BufferedImage image){
+	
+	//public static BufferedImage EncryptImage(String path, BufferedImage image){
 		
 		//Transform to B/W, encrypt
 		
-		return bw;
+		//return bw;
 		
-	}
+	//}
 	
 }
