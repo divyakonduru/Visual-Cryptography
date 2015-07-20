@@ -70,6 +70,16 @@ public class ImageFunctions {
 		return test_image;
 	}
 	
+	public static void Display_Image(BufferedImage img){
+		JLabel test = new JLabel(new ImageIcon(img));
+		JFrame sample = new JFrame();
+		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		sample.getContentPane().add(test);
+		sample.pack();sample.setLocation(600,50);
+		sample.setVisible(true);
+		
+	}
+	
 	public static BufferedImage Save(BufferedImage black_white, File path){
 		//BufferedImage save_image = null;
 		try {
@@ -84,19 +94,27 @@ public class ImageFunctions {
 	
 	public static BufferedImage Magnify(BufferedImage img){
 		
-		BufferedImage magnified_image = new BufferedImage(img.getWidth()*2, img.getHeight()*2, BufferedImage.TYPE_INT_RGB);
-		
-		int midpoint = 16777216/2;
+		BufferedImage magnified_image = new BufferedImage(
+				img.getWidth()*2, img.getHeight()*2, BufferedImage.TYPE_BYTE_BINARY);
 		
 		for(int i = 0; i < img.getHeight(); i++){
 			for(int j = 0; j < img.getWidth(); j++){
-				if(img.getRGB(j, i) < midpoint){
-					//Add magnification part
+				if(img.getRGB(j, i) == -16777216){
+					magnified_image.setRGB(j*2, i*2, 0);
+					magnified_image.setRGB(j*2+1, i*2, -1);
+					magnified_image.setRGB(j*2, i*2+1, -1);
+					magnified_image.setRGB(j*2+1, i*2+1, 0);
 					
+				}
+				else{
+					magnified_image.setRGB(j*2, i*2, -1);
+					magnified_image.setRGB(j*2+1, i*2, 0);
+					magnified_image.setRGB(j*2, i*2+1, 0);
+					magnified_image.setRGB(j*2+1, i*2+1, -1);
 				}
 			}
 		}
-		return img;
+		return magnified_image;
 	}
 	
 	//public static BufferedImage EncryptImage(String path, BufferedImage image){

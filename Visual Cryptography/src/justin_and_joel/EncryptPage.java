@@ -34,6 +34,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class EncryptPage extends JFrame {
 	
@@ -213,6 +214,34 @@ public class EncryptPage extends JFrame {
 					ImageFunctions.Save(black_white, Main.output_file);
 					ImageFunctions.Display(Main.output_file);
 					
+					BufferedImage key_image = new BufferedImage(
+					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
+					        BufferedImage.TYPE_BYTE_BINARY);
+					
+					Random rand = new Random();
+					
+					for(int i = 0; i < key_image.getHeight(); i++){
+						for(int j = 0; j < key_image.getWidth(); j++){
+							
+							boolean result = rand.nextBoolean();
+							if(result == true){
+								key_image.setRGB(j, i, -1);
+							}
+							else{
+								key_image.setRGB(j, i, 0);
+							}
+						}
+						
+					}
+										
+					ImageFunctions.Display_Image(key_image);
+					
+					BufferedImage magnified_key_image = new BufferedImage(
+							key_image.getWidth() * 2, key_image.getHeight()*2, BufferedImage.TYPE_BYTE_BINARY);
+					
+					magnified_key_image = ImageFunctions.Magnify(key_image);
+					
+					ImageFunctions.Display_Image(magnified_key_image);
 				}
 			}
 		});
