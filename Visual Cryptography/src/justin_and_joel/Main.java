@@ -28,14 +28,9 @@ public class Main {
 	static BufferedImage originalImage;
 	
 	public static void main(String[] args) {
-		System.out.println("Hello World");
-		System.out.println("Hello World again");
-		System.out.println("Hello World Once again");
-		System.out.println("Final Hello World Once again");
-		System.out.println("Most final Hello World");
+		
 		FirstPage.main(null);
 		
-
 	}
 
 }
