@@ -106,8 +106,43 @@ public class EncryptPage extends JFrame {
 					
 					Main.path = ImageFunctions.GetPathName();
 					Main.file = new File(Main.path);
+
 					
 					Main.originalImage = ImageFunctions.Display(Main.file);
+					
+					
+					
+					
+					// All items below are a demo solution to expanding the initial image to an image 4 times as big
+					int width = Main.originalImage.getWidth();
+					int height = Main.originalImage.getHeight();
+					
+					BufferedImage expanded = new BufferedImage(
+					        width*2, height*2,
+					        BufferedImage.TYPE_BYTE_BINARY);
+					
+					System.out.println(Main.originalImage.getHeight());
+					System.out.println(expanded.getHeight());
+					System.out.println(Main.originalImage.getRGB(0, 0));
+					
+					for( int i = 0; i < height; i++) {
+						for( int j = 0; j < width; j++) {
+							if (Main.originalImage.getRGB(j, i) != -1) {
+								expanded.setRGB(j*2, i*2, 255);
+							}
+							else {
+								expanded.setRGB(j*2,  i*2, -1);
+							}
+						}
+					}
+					
+					JLabel exp = new JLabel(new ImageIcon(expanded));
+					JFrame temp = new JFrame();
+					temp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					temp.getContentPane().add(exp);
+					temp.pack();
+					temp.setLocation(600,200);
+					temp.setVisible(true);
 				}
 			}
 		});
