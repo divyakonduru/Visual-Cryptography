@@ -23,8 +23,12 @@ public class Main {
 	
 	static String path; //Holds current file path
 	static String save_path; // Saved file path
+	static String save_key_path;
+	static String save_cipher_path;
 	static File file; //Holds current open file
-	static File output_file;
+	static File bw_file; //Holds black and white original
+	static File key_file;//Holds key image
+	static File cipher_file;//Holds cipher image
 	static BufferedImage originalImage;
 	
 	public static void main(String[] args) {

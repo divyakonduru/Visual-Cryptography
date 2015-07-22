@@ -80,10 +80,10 @@ public class ImageFunctions {
 		
 	}
 	
-	public static BufferedImage Save(BufferedImage black_white, File path){
+	public static BufferedImage Save(BufferedImage img, File path){
 		//BufferedImage save_image = null;
 		try {
-			ImageIO.write( black_white, "png", path);
+			ImageIO.write( img, "png", path);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

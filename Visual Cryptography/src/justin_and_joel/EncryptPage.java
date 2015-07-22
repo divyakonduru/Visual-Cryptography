@@ -169,6 +169,13 @@ public class EncryptPage extends JFrame {
 				}
 				else{
 					Main.save_path = ImageFunctions.GetPathName();
+					Main.save_key_path = Main.save_path + "_key.png";
+					Main.key_file = new File(Main.save_key_path);
+					System.out.println("Save key: " + Main.save_key_path);
+					Main.save_cipher_path = Main.save_path + "_cipher.png";
+					Main.cipher_file = new File(Main.save_cipher_path);
+					System.out.println("Save cipher: " + Main.save_cipher_path);
+					
 					
 					
 				}
@@ -200,7 +207,6 @@ public class EncryptPage extends JFrame {
 					
 				}
 				else if(imageFlag == true){
-					//Add function for encrypting
 					//BufferedImage black_white = ImageFunctions.EncryptImage(Main.save_path, Main.originalImage);
 					BufferedImage black_white = new BufferedImage(
 					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
@@ -210,9 +216,9 @@ public class EncryptPage extends JFrame {
 					graphics.drawImage(Main.originalImage, 0, 0, null);
 
 					
-					Main.output_file = new File(Main.save_path);
-					ImageFunctions.Save(black_white, Main.output_file);
-					ImageFunctions.Display(Main.output_file);
+					Main.bw_file = new File(Main.save_path + ".png");
+					ImageFunctions.Save(black_white, Main.bw_file);
+					ImageFunctions.Display(Main.bw_file);
 					
 					BufferedImage key_image = new BufferedImage(
 					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
@@ -235,9 +241,10 @@ public class EncryptPage extends JFrame {
 					}
 										
 					ImageFunctions.Display_Image(key_image);
+					ImageFunctions.Save(key_image, Main.key_file);
 					
 					BufferedImage magnified_key_image = new BufferedImage(
-							key_image.getWidth() * 2, key_image.getHeight()*2, BufferedImage.TYPE_BYTE_BINARY);
+							key_image.getWidth() * 2, key_image.getHeight() * 2, BufferedImage.TYPE_BYTE_BINARY);
 					
 					magnified_key_image = ImageFunctions.Magnify(key_image);
 					
