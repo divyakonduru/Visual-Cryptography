@@ -91,6 +91,26 @@ public class ImageFunctions {
 		
 	}
 	
+	public static BufferedImage Create_Cipher(BufferedImage original, BufferedImage key){
+		
+		BufferedImage cipher_image = new BufferedImage(
+		        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
+		        BufferedImage.TYPE_BYTE_BINARY);
+		
+		for( int i = 0; i<cipher_image.getHeight(); i++){
+			for(int j = 0; j<cipher_image.getWidth(); j++){
+				if(key.getRGB(j, i) == -16777216){
+					int temp = Get_and_Flip(original, i, j);
+					cipher_image.setRGB(j, i, temp);
+				}
+				else{
+					cipher_image.setRGB(j, i, original.getRGB(j, i));
+				}
+			}
+		}
+		return cipher_image;
+	}
+	
 	public static BufferedImage Magnify(BufferedImage img){
 		
 		BufferedImage magnified_image = new BufferedImage(
@@ -114,6 +134,18 @@ public class ImageFunctions {
 			}
 		}
 		return magnified_image;
+	}
+	
+	public static int Get_and_Flip(BufferedImage img, int i, int j){
+		
+		int initial = img.getRGB(j, i);
+		
+		if(initial == -16777216){
+			return -1;
+		}
+		else{
+			return 0;
+		}
 	}
 	
 	//public static BufferedImage EncryptImage(String path, BufferedImage image){

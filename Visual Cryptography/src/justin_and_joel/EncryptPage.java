@@ -245,6 +245,10 @@ public class EncryptPage extends JFrame {
 					magnified_key_image = ImageFunctions.Magnify(key_image);
 					
 					ImageFunctions.Display_Image(magnified_key_image);
+					
+					Main.cipher_image = ImageFunctions.Create_Cipher(black_white, key_image);
+					BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
+					ImageFunctions.Display_Image(magnified_cipher_image);
 				}
 			}
 		});

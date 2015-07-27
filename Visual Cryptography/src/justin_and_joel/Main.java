@@ -30,6 +30,7 @@ public class Main {
 	static File key_file;//Holds key image
 	static File cipher_file;//Holds cipher image
 	static BufferedImage originalImage;
+	static BufferedImage cipher_image;
 	
 	public static void main(String[] args) {
 		
