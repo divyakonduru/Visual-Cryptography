@@ -147,16 +147,12 @@ public class EncryptPage extends JFrame {
 						}
 					}
 					
-					JLabel exp = new JLabel(new ImageIcon(expanded));
-					JFrame temp = new JFrame();
-					temp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					temp.getContentPane().add(exp);
-					temp.pack();
-					temp.setLocation(600,200);
-					temp.setVisible(true);
+					ImageFunctions.Display_Image(expanded);
 				}
 			}
 		});
+		
+		
 		btnOriginal.setBounds(12, 66, 117, 25);
 		contentPane.add(btnOriginal);
 		

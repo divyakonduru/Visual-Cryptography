@@ -77,7 +77,6 @@ public class ImageFunctions {
 		sample.getContentPane().add(test);
 		sample.pack();sample.setLocation(600,50);
 		sample.setVisible(true);
-		
 	}
 	
 	public static BufferedImage Save(BufferedImage img, File path){
