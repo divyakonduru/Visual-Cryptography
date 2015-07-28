@@ -35,6 +35,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+
 import javax.swing.JTextPane;
 
 public class EncryptPage extends JFrame {
@@ -84,6 +85,7 @@ public class EncryptPage extends JFrame {
 		lblTitle.setBounds(138, 12, 192, 15);
 		contentPane.add(lblTitle);
 		
+		// Label next to Original Image button that displays selected image path
 		final JLabel Original_Path_Name = new JLabel("No Path Selected");
 		Original_Path_Name.setBounds(147, 64, 291, 30);
 		contentPane.add(Original_Path_Name);
@@ -121,11 +123,19 @@ public class EncryptPage extends JFrame {
 				else{
 					
 					Main.path = ImageFunctions.GetPathName();
+					
+					// Handles case where user cancels file selection
+					if (Main.path == null) {
+						System.out.println("There is no file currently selected");
+						return;
+					}
+					
 					Main.file = new File(Main.path);
 
 					
 					Main.originalImage = ImageFunctions.Display(Main.file);
 					
+					//Update label to display selected path
 					Original_Path_Name.setText(Main.path);
 					
 					
