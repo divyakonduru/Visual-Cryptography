@@ -35,6 +35,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import javax.swing.JTextPane;
 
 public class EncryptPage extends JFrame {
 	
@@ -83,6 +84,10 @@ public class EncryptPage extends JFrame {
 		lblTitle.setBounds(138, 12, 192, 15);
 		contentPane.add(lblTitle);
 		
+		final JLabel Original_Path_Name = new JLabel("No Path Selected");
+		Original_Path_Name.setBounds(147, 64, 291, 30);
+		contentPane.add(Original_Path_Name);
+		
 		rdbtnImage = new JRadioButton("Image");
 		rdbtnImage.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {
@@ -121,10 +126,12 @@ public class EncryptPage extends JFrame {
 					
 					Main.originalImage = ImageFunctions.Display(Main.file);
 					
+					Original_Path_Name.setText(Main.path);
 					
 					
 					
-					// All items below are a demo solution to expanding the initial image to an image 4 times as big
+					
+					/* All items below are a demo solution to expanding the initial image to an image 4 times as big
 					int width = Main.originalImage.getWidth();
 					int height = Main.originalImage.getHeight();
 					
@@ -140,14 +147,20 @@ public class EncryptPage extends JFrame {
 						for( int j = 0; j < width; j++) {
 							if (Main.originalImage.getRGB(j, i) != -1) {
 								expanded.setRGB(j*2, i*2, 255);
+								expanded.setRGB(j*2+1, i*2, 255);
+								expanded.setRGB(j*2, i*2+1, 255);
+								expanded.setRGB(j*2+1, i*2+1, 255);
 							}
 							else {
 								expanded.setRGB(j*2,  i*2, -1);
+								expanded.setRGB(j*2+1,  i*2, -1);
+								expanded.setRGB(j*2,  i*2+1, -1);
+								expanded.setRGB(j*2+1,  i*2+1, -1);
 							}
 						}
 					}
 					
-					ImageFunctions.Display_Image(expanded);
+					ImageFunctions.Display_Image(expanded);*/
 				}
 			}
 		});
@@ -259,9 +272,9 @@ public class EncryptPage extends JFrame {
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
 		
+
+		
 		
 		
 	}
-	
-	
 }
