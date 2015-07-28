@@ -124,14 +124,12 @@ public class EncryptPage extends JFrame {
 					
 					Main.path = ImageFunctions.GetPathName();
 					
-					// Handles case where user cancels file selection
-					if (Main.path == null) {
-						System.out.println("There is no file currently selected");
+					try{
+						Main.file = new File(Main.path);
+					} catch (NullPointerException e) {
+						System.out.println("An invalid file path was returned");
 						return;
 					}
-					
-					Main.file = new File(Main.path);
-
 					
 					Main.originalImage = ImageFunctions.Display(Main.file);
 					
