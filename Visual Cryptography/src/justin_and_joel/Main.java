@@ -25,10 +25,14 @@ public class Main {
 	static String save_path; // Saved file path
 	static String save_key_path;
 	static String save_cipher_path;
+	static String save_key_magnified_path;
+	static String save_cipher_magnified_path;
 	static File file; //Holds current open file
 	static File bw_file; //Holds black and white original
 	static File key_file;//Holds key image
 	static File cipher_file;//Holds cipher image
+	static File key_magnified_file;
+	static File cipher_magnified_file;
 	static BufferedImage originalImage;
 	static BufferedImage cipher_image;
 	
