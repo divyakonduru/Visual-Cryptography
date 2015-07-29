@@ -147,6 +147,11 @@ public class ImageFunctions {
 			return 0;
 		}
 	}
+
+	public static BufferedImage Decrypt(BufferedImage image1, BufferedImage image2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	//public static BufferedImage EncryptImage(String path, BufferedImage image){
 		

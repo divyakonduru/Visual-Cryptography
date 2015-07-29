@@ -94,25 +94,17 @@ public class DecryptPage extends JFrame {
 		contentPane.add(btnImage1, gbc_btnImage1);
 		btnImage1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
+				Main.image1_path = ImageFunctions.GetPathName();
+				
+				try{
+					Main.image1_file = new File(Main.image1_path);
+				} catch (NullPointerException e) {
+					System.out.println("An invalid file path was returned");
+					return;
+				}
+				
+				Main.image1 = ImageFunctions.Display(Main.image1_file);
 
-				 int ret = openFile.showOpenDialog(null);
-
-				 System.out.println(ret);
-
-				 if (ret==0) {
-
-					 File file = openFile.getSelectedFile();
-
-					 String filename = file.getName();
-
-					 Main.image1_path = filename;
-
-					 System.out.println(filename);
-				 }
-				 else{
-					 System.out.println("Error selecting file");
-				 }
 			}
 		});
 		
@@ -126,25 +118,16 @@ public class DecryptPage extends JFrame {
 		contentPane.add(btnImage2, gbc_btnImage2);
 		btnImage2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-
-				 int ret = openFile.showOpenDialog(null);
-
-				 System.out.println(ret);
-
-				 if (ret==0) {
-
-					 File file = openFile.getSelectedFile();
-
-					 String filename = file.getName();
-
-					 Main.image2_path = filename;
-
-					 System.out.println(filename);
-				 }
-				 else{
-					 System.out.println("Error selecting file");
-				 }
+				
+				Main.image2_path = ImageFunctions.GetPathName();
+				try{
+					Main.image2_file = new File(Main.image2_path);
+				} catch (NullPointerException e) {
+					System.out.println("An invalid file path was returned");
+					return;
+				}
+				
+				Main.image2 = ImageFunctions.Display(Main.image2_file);
 			}
 		});
 		
@@ -158,25 +141,15 @@ public class DecryptPage extends JFrame {
 		contentPane.add(btnSaveImage, gbc_btnSaveImage);
 		btnSaveImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-
-				 int ret = openFile.showOpenDialog(null);
-
-				 System.out.println(ret);
-
-				 if (ret==0) {
-
-					 File file = openFile.getSelectedFile();
-
-					 String filename = file.getName();
-
-					 Main.save_path = filename;
-
-					 System.out.println(filename);
-				 }
-				 else{
-					 System.out.println("Error selecting save file");
-				 }
+				
+				Main.image_decrypt_path = ImageFunctions.GetPathName();
+				
+				try{
+					Main.image_decrypt_file = new File(Main.image_decrypt_path);
+				} catch (NullPointerException e) {
+					System.out.println("An invalid file path was returned");
+					return;
+				}
 			}
 		});
 		
@@ -184,6 +157,7 @@ public class DecryptPage extends JFrame {
 		btnDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Add decryption function
+				Main.decrypt_image = ImageFunctions.Decrypt(Main.image1, Main.image2);
 			}
 		});
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();

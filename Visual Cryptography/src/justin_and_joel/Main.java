@@ -40,6 +40,13 @@ public class Main {
 	//For Decryption
 	static String image1_path;
 	static String image2_path;
+	static String image_decrypt_path;
+	static File image1_file;
+	static File image2_file;
+	static File image_decrypt_file;
+	static BufferedImage image1;
+	static BufferedImage image2;
+	static BufferedImage decrypt_image;
 	
 	public static void main(String[] args) {
 		
