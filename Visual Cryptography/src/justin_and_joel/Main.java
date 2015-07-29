@@ -21,6 +21,7 @@ public class Main {
 	 * @param args
 	 */
 	
+	//For encryption
 	static String path; //Holds current file path
 	static String save_path; // Saved file path
 	static String save_key_path;
@@ -35,6 +36,10 @@ public class Main {
 	static File cipher_magnified_file;
 	static BufferedImage originalImage;
 	static BufferedImage cipher_image;
+	
+	//For Decryption
+	static String image1_path;
+	static String image2_path;
 	
 	public static void main(String[] args) {
 		

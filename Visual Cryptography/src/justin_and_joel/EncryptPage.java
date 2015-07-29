@@ -127,12 +127,13 @@ public class EncryptPage extends JFrame {
 					// Handles case where user cancels file selection
 					try{
 						Main.file = new File(Main.path);
+						Main.originalImage = ImageFunctions.Display(Main.file);
 					} catch (NullPointerException e) {
 						System.out.println("An invalid file path was returned");
 						return;
 					}
 					
-					Main.originalImage = ImageFunctions.Display(Main.file);
+					
 					
 					//Update label to display selected path
 					Original_Path_Name.setText(Main.path);
@@ -181,20 +182,20 @@ public class EncryptPage extends JFrame {
 		btnModified = new JButton("Modified");
 		btnModified.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(imageFlag == false){
-					System.out.println("Select image radio button");
+				if(imageFlag == false || Main.path == null){
+					System.out.println("Select image radio button/select an original image");
 					return;
 				}
 				else{
 					Main.save_path = ImageFunctions.GetPathName();
 					Main.save_key_path = Main.save_path + "_key.png";
-					Main.key_file = new File(Main.save_key_path);
+					Main.key_file = new File(Main.save_path+ "_key.png");
 					System.out.println("Save key: " + Main.save_key_path);
+										
 					Main.save_cipher_path = Main.save_path + "_cipher.png";
 					Main.cipher_file = new File(Main.save_cipher_path);
 					System.out.println("Save cipher: " + Main.save_cipher_path);
-					
-					
+									
 					
 				}
 			}
@@ -230,7 +231,7 @@ public class EncryptPage extends JFrame {
 					Main.save_cipher_magnified_path = Main.save_path + "cipher_magnified.png";
 					Main.key_magnified_file = new File(Main.save_key_magnified_path);
 					Main.cipher_magnified_file = new File(Main.save_cipher_magnified_path);
-					
+										
 					BufferedImage black_white = new BufferedImage(
 					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
 					        BufferedImage.TYPE_BYTE_BINARY);

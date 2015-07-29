@@ -106,7 +106,7 @@ public class DecryptPage extends JFrame {
 
 					 String filename = file.getName();
 
-					 Main.path = filename;
+					 Main.image1_path = filename;
 
 					 System.out.println(filename);
 				 }
@@ -138,7 +138,7 @@ public class DecryptPage extends JFrame {
 
 					 String filename = file.getName();
 
-					 Main.path = filename;
+					 Main.image2_path = filename;
 
 					 System.out.println(filename);
 				 }
