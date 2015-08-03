@@ -143,6 +143,7 @@ public class DecryptPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Main.image_decrypt_path = ImageFunctions.GetPathName();
+				Main.image_decrypt_path += ".PNG";
 				
 				try{
 					Main.image_decrypt_file = new File(Main.image_decrypt_path);
@@ -160,6 +161,8 @@ public class DecryptPage extends JFrame {
 				Main.decrypt_image = ImageFunctions.Decrypt(Main.image1, Main.image2);
 				ImageFunctions.Display_Image(Main.decrypt_image, "Decrypted Image");
 				
+				// Save the decrypted image
+				ImageFunctions.Save(Main.decrypt_image, Main.image_decrypt_file);				
 			}
 		});
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();

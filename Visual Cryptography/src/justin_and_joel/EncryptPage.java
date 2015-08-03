@@ -227,8 +227,8 @@ public class EncryptPage extends JFrame {
 				}
 				else if(imageFlag == true){
 					//File names and paths for the magnified images
-					Main.save_key_magnified_path = Main.save_path + "key_magnified.png";
-					Main.save_cipher_magnified_path = Main.save_path + "cipher_magnified.png";
+					Main.save_key_magnified_path = Main.save_path + "_key_magnified.png";
+					Main.save_cipher_magnified_path = Main.save_path + "_cipher_magnified.png";
 					Main.key_magnified_file = new File(Main.save_key_magnified_path);
 					Main.cipher_magnified_file = new File(Main.save_cipher_magnified_path);
 										
