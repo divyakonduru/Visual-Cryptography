@@ -21,7 +21,7 @@ public class Main {
 	 * @param args
 	 */
 	
-	//For encryption
+	//For Encryption
 	static String path; //Holds current file path
 	static String save_path; // Saved file path
 	static String save_key_path;
