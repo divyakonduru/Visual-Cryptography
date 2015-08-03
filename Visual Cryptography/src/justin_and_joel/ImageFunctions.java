@@ -149,9 +149,44 @@ public class ImageFunctions {
 	}
 
 	public static BufferedImage Decrypt(BufferedImage image1, BufferedImage image2) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// Ensure images are the same size 
+		if (image1.getHeight() != image2.getHeight() || image1.getWidth() != image2.getWidth()) {
+			System.out.println("The size's of your selected images are mismatched");
+			return null;
+		}
+		
+		//Create a new buffered image to hold the decryption
+		BufferedImage output = new BufferedImage(
+				image1.getWidth(), image1.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+		
+		for (int i = 0; i < image1.getHeight(); i += 2) {
+			for (int j = 0; j < image1.getWidth(); j += 2) {
+				if (image1.getRGB(j, i) == -16777216 && image2.getRGB(j+1,  i) == -16777216){
+					output.setRGB(j, i, 0);
+					output.setRGB(j+1, i, 0);
+					output.setRGB(j, i+1, 0);
+					output.setRGB(j+1, i+1, 0);
+				}
+				else if (image1.getRGB(j, i) == -1 && image2.getRGB(j+1,  i) == -1){
+					output.setRGB(j, i, 0);
+					output.setRGB(j+1, i, 0);
+					output.setRGB(j, i+1, 0);
+					output.setRGB(j+1, i+1, 0);
+				}
+				else {
+					output.setRGB(j, i, -1);
+					output.setRGB(j+1, i, -1);
+					output.setRGB(j, i+1, -1);
+					output.setRGB(j+1, i+1, -1);
+				}
+												
+			}
+		}
+		
+		return output;
 	}
+}
 	
 	//public static BufferedImage EncryptImage(String path, BufferedImage image){
 		
@@ -160,5 +195,4 @@ public class ImageFunctions {
 		//return bw;
 		
 	//}
-	
-}
+

@@ -158,6 +158,8 @@ public class DecryptPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//Add decryption function
 				Main.decrypt_image = ImageFunctions.Decrypt(Main.image1, Main.image2);
+				ImageFunctions.Display_Image(Main.decrypt_image);
+				
 			}
 		});
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();
