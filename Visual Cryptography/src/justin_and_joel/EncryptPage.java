@@ -127,7 +127,7 @@ public class EncryptPage extends JFrame {
 					// Handles case where user cancels file selection
 					try{
 						Main.file = new File(Main.path);
-						Main.originalImage = ImageFunctions.Display(Main.file);
+						Main.originalImage = ImageFunctions.Display(Main.file, "Original");
 					} catch (NullPointerException e) {
 						System.out.println("An invalid file path was returned");
 						return;
@@ -242,7 +242,7 @@ public class EncryptPage extends JFrame {
 					
 					Main.bw_file = new File(Main.save_path + ".png");
 					ImageFunctions.Save(black_white, Main.bw_file);
-					ImageFunctions.Display(Main.bw_file);
+					ImageFunctions.Display(Main.bw_file, "Original B/W");
 					
 					BufferedImage key_image = new BufferedImage(
 					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
@@ -264,7 +264,7 @@ public class EncryptPage extends JFrame {
 						
 					}
 										
-					ImageFunctions.Display_Image(key_image);
+					ImageFunctions.Display_Image(key_image, "Key");
 					ImageFunctions.Save(key_image, Main.key_file);
 					
 					//BufferedImage magnified_key_image = new BufferedImage(
@@ -272,12 +272,12 @@ public class EncryptPage extends JFrame {
 					
 					BufferedImage magnified_key_image = ImageFunctions.Magnify(key_image);
 					ImageFunctions.Save(magnified_key_image, Main.key_magnified_file);
-					ImageFunctions.Display_Image(magnified_key_image);
+					ImageFunctions.Display_Image(magnified_key_image, "Magnified key");
 					
 					Main.cipher_image = ImageFunctions.Create_Cipher(black_white, key_image);
 					BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
 					ImageFunctions.Save(magnified_cipher_image, Main.cipher_magnified_file);
-					ImageFunctions.Display_Image(magnified_cipher_image);
+					ImageFunctions.Display_Image(magnified_cipher_image, "Magnified Cipher");
 				}
 			}
 		});

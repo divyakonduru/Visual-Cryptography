@@ -103,7 +103,7 @@ public class DecryptPage extends JFrame {
 					return;
 				}
 				
-				Main.image1 = ImageFunctions.Display(Main.image1_file);
+				Main.image1 = ImageFunctions.Display(Main.image1_file, "Image 1");
 
 			}
 		});
@@ -127,7 +127,7 @@ public class DecryptPage extends JFrame {
 					return;
 				}
 				
-				Main.image2 = ImageFunctions.Display(Main.image2_file);
+				Main.image2 = ImageFunctions.Display(Main.image2_file, "Image 2");
 			}
 		});
 		

@@ -52,7 +52,7 @@ public class ImageFunctions {
 		
 	}
 
-	public static BufferedImage Display(File file){
+	public static BufferedImage Display(File file, String title){
 		
 		BufferedImage test_image = null;
 		try {
@@ -61,7 +61,7 @@ public class ImageFunctions {
 			e1.printStackTrace();
 		}
 		JLabel test = new JLabel(new ImageIcon(test_image));
-		JFrame sample = new JFrame();
+		JFrame sample = new JFrame(title);
 		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		sample.getContentPane().add(test);
 		sample.pack();sample.setLocation(600,50);
@@ -70,9 +70,9 @@ public class ImageFunctions {
 		return test_image;
 	}
 	
-	public static void Display_Image(BufferedImage img){
+	public static void Display_Image(BufferedImage img, String title){
 		JLabel test = new JLabel(new ImageIcon(img));
-		JFrame sample = new JFrame();
+		JFrame sample = new JFrame(title);
 		sample.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		sample.getContentPane().add(test);
 		sample.pack();sample.setLocation(600,50);
