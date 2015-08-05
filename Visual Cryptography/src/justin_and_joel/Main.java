@@ -46,7 +46,7 @@ public class Main {
 	static File image_decrypt_file;
 	static BufferedImage image1;
 	static BufferedImage image2;
-	static BufferedImage decrypt_image;
+	static BufferedImage decrypt_image;  //Holds the decrypted image
 	
 	public static void main(String[] args) {
 		
