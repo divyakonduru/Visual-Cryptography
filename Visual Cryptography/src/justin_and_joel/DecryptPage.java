@@ -143,7 +143,7 @@ public class DecryptPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Main.image_decrypt_path = ImageFunctions.GetPathName();
-				Main.image_decrypt_path += ".PNG";
+				Main.image_decrypt_path += ".png";
 				
 				try{
 					Main.image_decrypt_file = new File(Main.image_decrypt_path);

@@ -34,6 +34,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.swing.JTextPane;
@@ -251,20 +253,28 @@ public class EncryptPage extends JFrame {
 					        BufferedImage.TYPE_BYTE_BINARY);
 					
 					Random rand = new Random();
-					
-					for(int i = 0; i < key_image.getHeight(); i++){
-						for(int j = 0; j < key_image.getWidth(); j++){
-							
-							boolean result = rand.nextBoolean();
-							if(result == true){
-								key_image.setRGB(j, i, WHITE);
-							}
-							else{
-								key_image.setRGB(j, i, BLACK);
-							}
-						}
+					try {
+						SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG");
 						
+						for(int i = 0; i < key_image.getHeight(); i++){
+							for(int j = 0; j < key_image.getWidth(); j++){
+								
+								int result = secureRandomGenerator.nextInt(100);
+								if(result < 50){
+									key_image.setRGB(j, i, WHITE);
+								}
+								else{
+									key_image.setRGB(j, i, BLACK);
+								}
+							}
+							
+						}
+					} catch (NoSuchAlgorithmException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
+					
+					
 										
 					ImageFunctions.Display_Image(key_image, "Key");
 					ImageFunctions.Save(key_image, Main.key_file);
