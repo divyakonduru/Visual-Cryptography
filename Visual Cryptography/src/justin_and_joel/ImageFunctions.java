@@ -25,6 +25,9 @@ import javax.swing.JLabel;
 
 public class ImageFunctions {
 	
+	static final int BLACK = -16777216;
+	static final int WHITE = -1;
+	
 	public static String GetPathName(){
 		JFileChooser openFile = new JFileChooser();
 		
@@ -99,7 +102,7 @@ public class ImageFunctions {
 		
 		for( int i = 0; i<cipher_image.getHeight(); i++){
 			for(int j = 0; j<cipher_image.getWidth(); j++){
-				if(key.getRGB(j, i) == -16777216){
+				if(key.getRGB(j, i) == BLACK){
 					int temp = Get_and_Flip(original, i, j);
 					cipher_image.setRGB(j, i, temp);
 				}
@@ -118,18 +121,18 @@ public class ImageFunctions {
 		
 		for(int i = 0; i < img.getHeight(); i++){
 			for(int j = 0; j < img.getWidth(); j++){
-				if(img.getRGB(j, i) == -16777216){
-					magnified_image.setRGB(j*2, i*2, 0);
-					magnified_image.setRGB(j*2+1, i*2, -1);
-					magnified_image.setRGB(j*2, i*2+1, -1);
-					magnified_image.setRGB(j*2+1, i*2+1, 0);
+				if(img.getRGB(j, i) == BLACK){
+					magnified_image.setRGB(j*2, i*2, BLACK);
+					magnified_image.setRGB(j*2+1, i*2, WHITE);
+					magnified_image.setRGB(j*2, i*2+1, WHITE);
+					magnified_image.setRGB(j*2+1, i*2+1, BLACK);
 					
 				}
 				else{
-					magnified_image.setRGB(j*2, i*2, -1);
-					magnified_image.setRGB(j*2+1, i*2, 0);
-					magnified_image.setRGB(j*2, i*2+1, 0);
-					magnified_image.setRGB(j*2+1, i*2+1, -1);
+					magnified_image.setRGB(j*2, i*2, WHITE);
+					magnified_image.setRGB(j*2+1, i*2, BLACK);
+					magnified_image.setRGB(j*2, i*2+1, BLACK);
+					magnified_image.setRGB(j*2+1, i*2+1, WHITE);
 				}
 			}
 		}
@@ -140,7 +143,7 @@ public class ImageFunctions {
 		
 		int initial = img.getRGB(j, i);
 		
-		if(initial == -16777216){
+		if(initial == BLACK){
 			return -1;
 		}
 		else{
@@ -162,23 +165,23 @@ public class ImageFunctions {
 		
 		for (int i = 0; i < image1.getHeight(); i += 2) {
 			for (int j = 0; j < image1.getWidth(); j += 2) {
-				if (image1.getRGB(j, i) == -16777216 && image2.getRGB(j+1,  i) == -16777216){
-					output.setRGB(j, i, 0);
-					output.setRGB(j+1, i, 0);
-					output.setRGB(j, i+1, 0);
-					output.setRGB(j+1, i+1, 0);
+				if (image1.getRGB(j, i) == BLACK && image2.getRGB(j+1,  i) == BLACK){
+					output.setRGB(j, i, BLACK);
+					output.setRGB(j+1, i, BLACK);
+					output.setRGB(j, i+1, BLACK);
+					output.setRGB(j+1, i+1, BLACK);
 				}
-				else if (image1.getRGB(j, i) == -1 && image2.getRGB(j+1,  i) == -1){
-					output.setRGB(j, i, 0);
-					output.setRGB(j+1, i, 0);
-					output.setRGB(j, i+1, 0);
-					output.setRGB(j+1, i+1, 0);
+				else if (image1.getRGB(j, i) == WHITE && image2.getRGB(j+1,  i) == WHITE){
+					output.setRGB(j, i, BLACK);
+					output.setRGB(j+1, i, BLACK);
+					output.setRGB(j, i+1, BLACK);
+					output.setRGB(j+1, i+1, BLACK);
 				}
 				else {
-					output.setRGB(j, i, -1);
-					output.setRGB(j+1, i, -1);
-					output.setRGB(j, i+1, -1);
-					output.setRGB(j+1, i+1, -1);
+					output.setRGB(j, i, WHITE);
+					output.setRGB(j+1, i, WHITE);
+					output.setRGB(j, i+1, WHITE);
+					output.setRGB(j+1, i+1, WHITE);
 				}
 												
 			}

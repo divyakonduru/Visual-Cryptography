@@ -40,6 +40,8 @@ import javax.swing.JTextPane;
 
 public class EncryptPage extends JFrame {
 	
+	static final int BLACK = -16777216;
+	static final int WHITE = -1;
 	private boolean imageFlag;
 	JRadioButton rdbtnImage;
 	JRadioButton rdbtnText;
@@ -255,10 +257,10 @@ public class EncryptPage extends JFrame {
 							
 							boolean result = rand.nextBoolean();
 							if(result == true){
-								key_image.setRGB(j, i, -1);
+								key_image.setRGB(j, i, WHITE);
 							}
 							else{
-								key_image.setRGB(j, i, 0);
+								key_image.setRGB(j, i, BLACK);
 							}
 						}
 						
