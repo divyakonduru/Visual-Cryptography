@@ -143,28 +143,45 @@ public class DecryptPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Main.image_decrypt_path = ImageFunctions.GetPathName();
+				Main.normal_size_decrypted_path = Main.image_decrypt_path;
+				
 				Main.image_decrypt_path += ".png";
+				Main.normal_size_decrypted_path += "_normal_size.png";
+				
 				
 				try{
 					Main.image_decrypt_file = new File(Main.image_decrypt_path);
+					Main.normal_size_decrypted_file = new File(Main.normal_size_decrypted_path);
 				} catch (NullPointerException e) {
 					System.out.println("An invalid file path was returned");
 					return;
 				}
+				
 			}
 		});
 		
 		JButton btnDecrypt = new JButton("Decrypt");
 		btnDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Add decryption function
+				
+				// Decrypt and display the encoded images
 				Main.decrypt_image = ImageFunctions.Decrypt(Main.image1, Main.image2);
 				ImageFunctions.Display_Image(Main.decrypt_image, "Decrypted Image");
 				
 				// Save the decrypted image
-				ImageFunctions.Save(Main.decrypt_image, Main.image_decrypt_file);				
+				ImageFunctions.Save(Main.decrypt_image, Main.image_decrypt_file);
+
+				Main.normal_size_decrypted_image = ImageFunctions.Shrink(Main.decrypt_image);
+				ImageFunctions.Display_Image(Main.normal_size_decrypted_image, "Regular Sized Decrypted Image");
+				
+				ImageFunctions.Save(Main.normal_size_decrypted_image, Main.normal_size_decrypted_file);
+				
+
+				
+				
 			}
 		});
+		
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();
 		gbc_btnDecrypt.fill = GridBagConstraints.BOTH;
 		gbc_btnDecrypt.gridx = 0;

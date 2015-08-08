@@ -41,12 +41,15 @@ public class Main {
 	static String image1_path;
 	static String image2_path;
 	static String image_decrypt_path;
+	static String normal_size_decrypted_path;
 	static File image1_file;
 	static File image2_file;
 	static File image_decrypt_file;
+	static File normal_size_decrypted_file;
 	static BufferedImage image1;
 	static BufferedImage image2;
 	static BufferedImage decrypt_image;  //Holds the decrypted image
+	static BufferedImage normal_size_decrypted_image;
 	
 	public static void main(String[] args) {
 		

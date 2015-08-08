@@ -139,6 +139,24 @@ public class ImageFunctions {
 		return magnified_image;
 	}
 	
+	public static BufferedImage Shrink(BufferedImage img) {
+		BufferedImage shrunk_image = new BufferedImage (
+				img.getWidth()/2, img.getHeight()/2, BufferedImage.TYPE_BYTE_BINARY);
+		
+		for(int i = 0; i < img.getHeight(); i += 2) {
+			for (int j = 0; j < img.getWidth(); j += 2) {
+				if (img.getRGB(j, i) == BLACK) {
+					shrunk_image.setRGB(j/2,  i/2,  BLACK);
+				}
+				else {
+					shrunk_image.setRGB(j/2, i/2, WHITE);
+				}
+			}
+		}
+		
+		return shrunk_image;
+	}
+	
 	public static int Get_and_Flip(BufferedImage img, int i, int j){
 		
 		int initial = img.getRGB(j, i);
