@@ -12,12 +12,16 @@ package justin_and_joel;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -25,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -86,7 +91,11 @@ public class EncryptPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Create Encrypted Images");
-		lblTitle.setBounds(138, 12, 192, 15);
+		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblTitle.setBorder(loweredetched);
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(69, 12, 304, 23);
 		contentPane.add(lblTitle);
 		
 		// Label next to Original Image button that displays selected image path
@@ -213,7 +222,7 @@ public class EncryptPage extends JFrame {
 		
 		textArea = new JTextArea();
 		textArea.setLineWrap(true);
-		textArea.setBounds(12, 164, 192, 79);
+		textArea.setBounds(12, 164, 426, 79);
 		contentPane.add(textArea);
 		
 		btnEncrypt = new JButton("Encrypt");

@@ -68,7 +68,7 @@ public class FirstPage extends JFrame {
 					EncryptPage.main(null);
 				}
 			});
-			btnEncrypt.setBounds(160, 110, 150, 25);
+			btnEncrypt.setBounds(100, 110, 240, 25);
 			contentPane.add(btnEncrypt);
 			
 			JButton btnDecrypt = new JButton("Decrypt");
@@ -78,7 +78,7 @@ public class FirstPage extends JFrame {
 					DecryptPage.main(null);
 				}
 			});
-			btnDecrypt.setBounds(160, 140, 150, 25);
+			btnDecrypt.setBounds(100, 140, 240, 25);
 			contentPane.add(btnDecrypt);
 		}
 }
