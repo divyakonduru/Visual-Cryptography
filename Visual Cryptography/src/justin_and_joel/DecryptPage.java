@@ -62,7 +62,7 @@ public class DecryptPage extends JFrame {
 	 */
 	public DecryptPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 305);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -184,6 +184,7 @@ public class DecryptPage extends JFrame {
 		
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();
 		gbc_btnDecrypt.fill = GridBagConstraints.BOTH;
+		gbc_btnDecrypt.insets = new Insets(0, 50, 5, 50);
 		gbc_btnDecrypt.gridx = 0;
 		gbc_btnDecrypt.gridy = 4;
 		contentPane.add(btnDecrypt, gbc_btnDecrypt);
