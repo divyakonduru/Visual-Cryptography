@@ -104,6 +104,10 @@ public class EncryptPage extends JFrame {
 		Original_Path_Name.setBounds(147, 64, 291, 30);
 		contentPane.add(Original_Path_Name);
 		
+		final JLabel Save_Path_Name = new JLabel("No Save Path Selected");
+		Save_Path_Name.setBounds(147, 97, 291, 30);
+		contentPane.add(Save_Path_Name);
+		
 		final JCheckBox chckbxIncludePrintFriendly = new JCheckBox("Add Print Friendly Copy");
 		chckbxIncludePrintFriendly.setBounds(232, 256, 206, 23);
 		contentPane.add(chckbxIncludePrintFriendly);
@@ -213,6 +217,9 @@ public class EncryptPage extends JFrame {
 					Main.save_cipher_path = Main.save_path + "_cipher.png";
 					Main.cipher_file = new File(Main.save_cipher_path);
 					System.out.println("Save cipher: " + Main.save_cipher_path);
+					
+					//Update save label to display selected path
+					Save_Path_Name.setText(Main.save_path += ".png");
 									
 					
 				}
@@ -417,6 +424,8 @@ public class EncryptPage extends JFrame {
 		btnClear = new JButton("Clear");
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
+		
+
 		
 
 		
