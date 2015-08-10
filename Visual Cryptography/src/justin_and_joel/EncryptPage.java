@@ -422,6 +422,11 @@ public class EncryptPage extends JFrame {
 		contentPane.add(btnEncrypt);
 		
 		btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
 		
