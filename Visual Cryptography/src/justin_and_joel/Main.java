@@ -34,6 +34,8 @@ public class Main {
 	static File cipher_file;//Holds cipher image
 	static File key_magnified_file;
 	static File cipher_magnified_file;
+	static File key_print_ready_file;
+	static File cipher_print_ready_file;
 	static BufferedImage originalImage;
 	static BufferedImage cipher_image;
 	

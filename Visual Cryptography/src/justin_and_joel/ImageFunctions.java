@@ -204,16 +204,35 @@ public class ImageFunctions {
 												
 			}
 		}
-		
 		return output;
 	}
-}
 	
-	//public static BufferedImage EncryptImage(String path, BufferedImage image){
+	static BufferedImage make_print_friendly(BufferedImage img) {
 		
-		//Transform to B/W, encrypt
+		int scale = 20;
 		
-		//return bw;
+		BufferedImage print_image = new BufferedImage(
+				img.getWidth()*scale, img.getHeight()*scale, BufferedImage.TYPE_BYTE_BINARY);
 		
-	//}
+		for(int i = 0; i < img.getHeight(); i++){
+			for(int j = 0; j < img.getWidth(); j++){
+				if(img.getRGB(j, i) == BLACK){
+					for( int x = 0; x < scale; x++) {
+						for( int y = 0; y < scale; y++){
+							print_image.setRGB(j*scale+y,i*scale+x, BLACK);
+						}
+					}				
+				}
+				else{
+					for( int x = 0; x < scale; x++) {
+						for( int y = 0; y < scale; y++){
+							print_image.setRGB(j*scale+y,i*scale+x, WHITE);
+						}
+					}
+				}
+			}
+		}
+		return print_image;
+	}
+}
 

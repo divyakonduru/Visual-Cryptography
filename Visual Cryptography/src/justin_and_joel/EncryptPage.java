@@ -44,6 +44,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.swing.JTextPane;
+import javax.swing.JCheckBox;
 
 public class EncryptPage extends JFrame {
 	
@@ -102,6 +103,10 @@ public class EncryptPage extends JFrame {
 		final JLabel Original_Path_Name = new JLabel("No Path Selected");
 		Original_Path_Name.setBounds(147, 64, 291, 30);
 		contentPane.add(Original_Path_Name);
+		
+		final JCheckBox chckbxIncludePrintFriendly = new JCheckBox("Add Print Friendly Copy");
+		chckbxIncludePrintFriendly.setBounds(232, 256, 206, 23);
+		contentPane.add(chckbxIncludePrintFriendly);
 		
 		rdbtnImage = new JRadioButton("Image");
 		rdbtnImage.addMouseListener(new MouseAdapter(){
@@ -236,7 +241,7 @@ public class EncryptPage extends JFrame {
 				}
 				else if(imageFlag == false && !text.equals("")){
 					//Add function to convert text to image
-					
+					System.out.println("Function to convert text to image will run");
 				}
 				else if(imageFlag == true){
 					//File names and paths for the magnified images
@@ -299,6 +304,23 @@ public class EncryptPage extends JFrame {
 					BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
 					ImageFunctions.Save(magnified_cipher_image, Main.cipher_magnified_file);
 					ImageFunctions.Display_Image(magnified_cipher_image, "Magnified Cipher");
+					
+					if (chckbxIncludePrintFriendly.isSelected()) {
+						System.out.println("The printer friendly check box is selected, outputting printer sized pics");
+						
+						BufferedImage print_ready_test = ImageFunctions.make_print_friendly(black_white);
+						ImageFunctions.Display_Image(print_ready_test, "Print Ready");
+						
+						BufferedImage print_ready_key = ImageFunctions.make_print_friendly(magnified_key_image);
+						String print_ready_key_path = Main.save_path + "_key_print_ready.png";
+						File print_ready_key_file = new File(print_ready_key_path);
+						ImageFunctions.Save(print_ready_key, print_ready_key_file);
+						
+						BufferedImage print_ready_cipher = ImageFunctions.make_print_friendly(magnified_cipher_image);
+						String print_ready_cipher_path = Main.save_path + "_cipher_print_ready.png";
+						File print_ready_cipher_file = new File(print_ready_cipher_path);
+						ImageFunctions.Save(print_ready_cipher, print_ready_cipher_file);
+					}
 				}
 			}
 		});
@@ -308,6 +330,8 @@ public class EncryptPage extends JFrame {
 		btnClear = new JButton("Clear");
 		btnClear.setBounds(121, 255, 79, 25);
 		contentPane.add(btnClear);
+		
+
 		
 
 		
