@@ -200,7 +200,7 @@ public class EncryptPage extends JFrame {
 		btnModified = new JButton("Modified");
 		btnModified.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(imageFlag == false || Main.path == null){
+				if(imageFlag == false && Main.path == null && rdbtnText.isSelected() == false){
 					System.out.println("Select image radio button/select an original image");
 					return;
 				}
@@ -226,6 +226,7 @@ public class EncryptPage extends JFrame {
 		contentPane.add(lblMessage);
 		
 		textArea = new JTextArea();
+		textArea.setFont(new Font("Dialog", Font.BOLD, 24));
 		textArea.setLineWrap(true);
 		textArea.setBounds(12, 164, 426, 79);
 		contentPane.add(textArea);
@@ -240,8 +241,94 @@ public class EncryptPage extends JFrame {
 					
 				}
 				else if(imageFlag == false && !text.equals("")){
-					//Add function to convert text to image
-					System.out.println("Function to convert text to image will run");
+					
+					System.out.println("converting textbox to image");
+					
+					BufferedImage text_image = new BufferedImage(textArea.getWidth(), textArea.getHeight(), BufferedImage.TYPE_BYTE_BINARY );
+					Graphics2D graphic = text_image.createGraphics();
+					textArea.printAll(graphic);
+					graphic.dispose();
+					
+					//ImageFunctions.Display_Image(text_image, "Text converted to image");
+					Main.originalImage = text_image;
+					
+					//File names and paths for the magnified images
+					Main.save_key_magnified_path = Main.save_path + "_key_magnified.png";
+					Main.save_cipher_magnified_path = Main.save_path + "_cipher_magnified.png";
+					Main.key_magnified_file = new File(Main.save_key_magnified_path);
+					Main.cipher_magnified_file = new File(Main.save_cipher_magnified_path);
+										
+					BufferedImage black_white = new BufferedImage(
+					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
+					        BufferedImage.TYPE_BYTE_BINARY);
+					    
+					Graphics2D graphics = black_white.createGraphics();
+					graphics.drawImage(Main.originalImage, 0, 0, null);
+
+					
+					Main.bw_file = new File(Main.save_path + ".png");
+					ImageFunctions.Save(black_white, Main.bw_file);
+					ImageFunctions.Display(Main.bw_file, "Original B/W");
+					
+					BufferedImage key_image = new BufferedImage(
+					        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
+					        BufferedImage.TYPE_BYTE_BINARY);
+					
+					Random rand = new Random();
+					try {
+						SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG");
+						
+						for(int i = 0; i < key_image.getHeight(); i++){
+							for(int j = 0; j < key_image.getWidth(); j++){
+								
+								int result = secureRandomGenerator.nextInt(100);
+								if(result < 50){
+									key_image.setRGB(j, i, WHITE);
+								}
+								else{
+									key_image.setRGB(j, i, BLACK);
+								}
+							}
+							
+						}
+					} catch (NoSuchAlgorithmException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+										
+					ImageFunctions.Display_Image(key_image, "Key");
+					ImageFunctions.Save(key_image, Main.key_file);
+					
+					//BufferedImage magnified_key_image = new BufferedImage(
+							//key_image.getWidth() * 2, key_image.getHeight() * 2, BufferedImage.TYPE_BYTE_BINARY);
+					
+					BufferedImage magnified_key_image = ImageFunctions.Magnify(key_image);
+					ImageFunctions.Save(magnified_key_image, Main.key_magnified_file);
+					ImageFunctions.Display_Image(magnified_key_image, "Magnified key");
+					
+					Main.cipher_image = ImageFunctions.Create_Cipher(black_white, key_image);
+					BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
+					ImageFunctions.Save(magnified_cipher_image, Main.cipher_magnified_file);
+					ImageFunctions.Display_Image(magnified_cipher_image, "Magnified Cipher");
+					
+					if (chckbxIncludePrintFriendly.isSelected()) {
+						System.out.println("The printer friendly check box is selected, outputting printer sized pics");
+						
+						BufferedImage print_ready_test = ImageFunctions.make_print_friendly(black_white);
+						ImageFunctions.Display_Image(print_ready_test, "Print Ready");
+						
+						BufferedImage print_ready_key = ImageFunctions.make_print_friendly(magnified_key_image);
+						String print_ready_key_path = Main.save_path + "_key_print_ready.png";
+						File print_ready_key_file = new File(print_ready_key_path);
+						ImageFunctions.Save(print_ready_key, print_ready_key_file);
+						
+						BufferedImage print_ready_cipher = ImageFunctions.make_print_friendly(magnified_cipher_image);
+						String print_ready_cipher_path = Main.save_path + "_cipher_print_ready.png";
+						File print_ready_cipher_file = new File(print_ready_cipher_path);
+						ImageFunctions.Save(print_ready_cipher, print_ready_cipher_file);
+					}
 				}
 				else if(imageFlag == true){
 					//File names and paths for the magnified images
