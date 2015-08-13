@@ -10,9 +10,7 @@ This project is a Java application that utilizes visual cryptography techniques 
 
 package justin_and_joel;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,6 +48,8 @@ public class FirstPage extends JFrame {
 		 * Create the frame.
 		 */
 		public FirstPage() {
+			
+			// Create main Jpanel
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -57,10 +57,12 @@ public class FirstPage extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
+			// Create label
 			JLabel Title = new JLabel("VisualCryptography");
 			Title.setBounds(37, 12, 378, 28);
 			contentPane.add(Title);
 			
+			// Button to access encryption page
 			JButton btnEncrypt = new JButton("Encrypt");
 			btnEncrypt.addMouseListener(new MouseAdapter() {
 				@Override
@@ -71,6 +73,7 @@ public class FirstPage extends JFrame {
 			btnEncrypt.setBounds(100, 110, 240, 25);
 			contentPane.add(btnEncrypt);
 			
+			// Button to access decryption page
 			JButton btnDecrypt = new JButton("Decrypt");
 			btnDecrypt.addMouseListener(new MouseAdapter() {
 				@Override
