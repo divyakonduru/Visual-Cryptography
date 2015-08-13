@@ -10,41 +10,34 @@ This project is a Java application that utilizes visual cryptography techniques 
 
 package justin_and_joel;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.JCheckBox;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
-import javax.swing.JTextPane;
-import javax.swing.JCheckBox;
 
 public class EncryptPage extends JFrame {
 	
@@ -145,27 +138,31 @@ public class EncryptPage extends JFrame {
 				rdbtnImage.setSelected(false);
 			}
 		});
-		
 		rdbtnText.setBounds(91, 35, 79, 23);
 		contentPane.add(rdbtnText);
 		
+		// Button to select file to import as the original image
 		btnOriginal = new JButton("Original");
 		btnOriginal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
 				if(imageFlag == false && textFlag == false){
 					System.out.println("Select image radio button");
 					return;
 				}
+				
 				else{
 					
+					// Allows user to choose file name and path for original image
 					Main.path = ImageFunctions.GetPathName();
 					
-					// Handles case where user cancels file selection
+					// Handles errors during file selection
 					try{
 						Main.file = new File(Main.path);
 						Main.originalImage = ImageFunctions.Display(Main.file, "Original");
 					} catch (NullPointerException e) {
-						System.out.println("An invalid file path was returned");
+						Original_Path_Name.setText("Error opening image file");
 						return;
 					}
 		
@@ -174,30 +171,42 @@ public class EncryptPage extends JFrame {
 				}
 			}
 		});
-		
-		
 		btnOriginal.setBounds(12, 66, 117, 25);
 		contentPane.add(btnOriginal);
 		
+		// Button to choose save destination for output
 		btnModified = new JButton("Modified");
 		btnModified.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if(imageFlag == false && Main.path == null && rdbtnText.isSelected() == false){
 					System.out.println("Select image radio button/select an original image");
 					return;
 				}
+				
 				else{
+					
+					// Allow user to chose a save location and name
 					Main.save_path = ImageFunctions.GetPathName();
+					
+					// Catch errors during path selection
+					if (Main.save_path == null) {
+						Save_Path_Name.setText("Error selecting save destination");
+						return;
+					}
+					
+					// Create a save file for key
 					Main.save_key_path = Main.save_path + "_key.png";
-					Main.key_file = new File(Main.save_path+ "_key.png");
+					Main.key_file = new File(Main.save_key_path);
 					System.out.println("Save key: " + Main.save_key_path);
 										
+					// Create a save file for cipher
 					Main.save_cipher_path = Main.save_path + "_cipher.png";
 					Main.cipher_file = new File(Main.save_cipher_path);
 					System.out.println("Save cipher: " + Main.save_cipher_path);
 					
 					//Update save label to display selected path
-					Save_Path_Name.setText(Main.save_path += ".png");
+					Save_Path_Name.setText(Main.save_path + ".png");
 									
 					
 				}
@@ -206,36 +215,46 @@ public class EncryptPage extends JFrame {
 		btnModified.setBounds(12, 100, 117, 25);
 		contentPane.add(btnModified);
 		
+		// Label for text entry
 		JLabel lblMessage = new JLabel("Message:");
 		lblMessage.setBounds(12, 137, 70, 15);
 		contentPane.add(lblMessage);
 		
+		// Create text input box
 		textArea = new JTextArea();
 		textArea.setFont(new Font("Dialog", Font.BOLD, 24));
 		textArea.setLineWrap(true);
 		textArea.setBounds(12, 164, 426, 79);
 		contentPane.add(textArea);
 		
+		// Button to process selected images and output encrypted images
 		btnEncrypt = new JButton("Encrypt");
 		btnEncrypt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				//Read in user text input
 				String text = textArea.getText();
+				
+				// If user has not entered text, prompt and return
 				if(imageFlag == false && text.equals("")){
 					System.out.println("Enter some text");
 					return;
 				}
 				
+				// If user has entered text, obtain image of textbox and store as original image
 				if(imageFlag == false && textFlag == true){
 					
-					System.out.println("converting textbox to image");
+					//System.out.println("converting textbox to image"); // Print debugging statement
 					
+					// Convert text input box into an image
 					BufferedImage text_image = new BufferedImage(textArea.getWidth(), textArea.getHeight(), BufferedImage.TYPE_BYTE_BINARY );
 					Graphics2D graphic = text_image.createGraphics();
 					textArea.printAll(graphic);
 					graphic.dispose();
 					
-					//ImageFunctions.Display_Image(text_image, "Text converted to image");
+					//ImageFunctions.Display_Image(text_image, "Text converted to image"); // Print debugging statement
+					
 					Main.originalImage = text_image;
 				}
 				
@@ -244,23 +263,25 @@ public class EncryptPage extends JFrame {
 				Main.save_cipher_magnified_path = Main.save_path + "_cipher_magnified.png";
 				Main.key_magnified_file = new File(Main.save_key_magnified_path);
 				Main.cipher_magnified_file = new File(Main.save_cipher_magnified_path);
-									
+				
+				// Create Black and White image from original image
 				BufferedImage black_white = new BufferedImage(
 				        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
 				        BufferedImage.TYPE_BYTE_BINARY);
-				    
 				Graphics2D graphics = black_white.createGraphics();
 				graphics.drawImage(Main.originalImage, 0, 0, null);
 
-				
+				// Save and display black and white image file
 				Main.bw_file = new File(Main.save_path + ".png");
 				ImageFunctions.Save(black_white, Main.bw_file);
 				ImageFunctions.Display(Main.bw_file, "Original B/W");
 				
+				// Create image key
 				BufferedImage key_image = new BufferedImage(
 				        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
 				        BufferedImage.TYPE_BYTE_BINARY);
 				
+				// Generate a random key
 				Random rand = new Random();
 				try {
 					SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG");
@@ -276,7 +297,6 @@ public class EncryptPage extends JFrame {
 								key_image.setRGB(j, i, BLACK);
 							}
 						}
-						
 					}
 				} catch (NoSuchAlgorithmException e1) {
 					// TODO Auto-generated catch block
@@ -284,24 +304,24 @@ public class EncryptPage extends JFrame {
 				}
 				
 				
-									
+				// Save and display key image file					
 				ImageFunctions.Display_Image(key_image, "Key");
 				ImageFunctions.Save(key_image, Main.key_file);
 				
-				//BufferedImage magnified_key_image = new BufferedImage(
-						//key_image.getWidth() * 2, key_image.getHeight() * 2, BufferedImage.TYPE_BYTE_BINARY);
-				
+				// Save and display magnified key image file
 				BufferedImage magnified_key_image = ImageFunctions.Magnify(key_image);
 				ImageFunctions.Save(magnified_key_image, Main.key_magnified_file);
 				ImageFunctions.Display_Image(magnified_key_image, "Magnified key");
 				
+				// Save and display magnified cipher image file
 				Main.cipher_image = ImageFunctions.Create_Cipher(black_white, key_image);
 				BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
 				ImageFunctions.Save(magnified_cipher_image, Main.cipher_magnified_file);
 				ImageFunctions.Display_Image(magnified_cipher_image, "Magnified Cipher");
 				
+				// Save and display printer friendly images if button checked
 				if (chckbxIncludePrintFriendly.isSelected()) {
-					System.out.println("The printer friendly check box is selected, outputting printer sized pics");
+					//System.out.println("The printer friendly check box is selected, outputting printer sized pics");  // Print debugging statement
 					
 					BufferedImage print_ready_test = ImageFunctions.make_print_friendly(black_white);
 					ImageFunctions.Display_Image(print_ready_test, "Print Ready");
@@ -321,6 +341,7 @@ public class EncryptPage extends JFrame {
 		btnEncrypt.setBounds(12, 255, 97, 25);
 		contentPane.add(btnEncrypt);
 		
+		// Reset user input text if clicked
 		btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

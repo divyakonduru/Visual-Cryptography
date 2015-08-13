@@ -10,34 +10,28 @@ This project is a Java application that utilizes visual cryptography techniques 
 
 package justin_and_joel;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.GridLayout;
-
-import javax.swing.SwingConstants;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 import java.io.File;
 
 public class DecryptPage extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 
@@ -61,6 +55,8 @@ public class DecryptPage extends JFrame {
 	 * Create the frame.
 	 */
 	public DecryptPage() {
+		
+		// Create the decrypt page JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 305);
 		contentPane = new JPanel();
@@ -73,6 +69,7 @@ public class DecryptPage extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
+		// Create decrypt page title
 		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		JLabel lblDecrypt = new JLabel("Decryption");
 		lblDecrypt.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -85,6 +82,7 @@ public class DecryptPage extends JFrame {
 		gbc_lblDecrypt.gridy = 0;
 		contentPane.add(lblDecrypt, gbc_lblDecrypt);
 		
+		// Allows user to select first image to decrypt
 		JButton btnImage1 = new JButton("Image 1");
 		GridBagConstraints gbc_btnImage1 = new GridBagConstraints();
 		gbc_btnImage1.fill = GridBagConstraints.BOTH;
@@ -94,8 +92,11 @@ public class DecryptPage extends JFrame {
 		contentPane.add(btnImage1, gbc_btnImage1);
 		btnImage1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				// Allow user to choose path
 				Main.image1_path = ImageFunctions.GetPathName();
 				
+				// Attempt to open file as image
 				try{
 					Main.image1_file = new File(Main.image1_path);
 				} catch (NullPointerException e) {
@@ -103,12 +104,13 @@ public class DecryptPage extends JFrame {
 					return;
 				}
 				
+				// Display image 1
 				Main.image1 = ImageFunctions.Display(Main.image1_file, "Image 1");
 
 			}
 		});
 		
-		
+		// Allow user to select second image to decrypt
 		JButton btnImage2 = new JButton("Image 2");
 		GridBagConstraints gbc_btnImage2 = new GridBagConstraints();
 		gbc_btnImage2.fill = GridBagConstraints.BOTH;
@@ -119,7 +121,10 @@ public class DecryptPage extends JFrame {
 		btnImage2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				// Allow user to choose second file
 				Main.image2_path = ImageFunctions.GetPathName();
+				
+				// Attempt to open file as image
 				try{
 					Main.image2_file = new File(Main.image2_path);
 				} catch (NullPointerException e) {
@@ -127,11 +132,12 @@ public class DecryptPage extends JFrame {
 					return;
 				}
 				
+				// Display image 2
 				Main.image2 = ImageFunctions.Display(Main.image2_file, "Image 2");
 			}
 		});
 		
-		
+		// Choose a path for output to be saved
 		JButton btnSaveImage = new JButton("Save Image");
 		GridBagConstraints gbc_btnSaveImage = new GridBagConstraints();
 		gbc_btnSaveImage.fill = GridBagConstraints.BOTH;
@@ -142,13 +148,15 @@ public class DecryptPage extends JFrame {
 		btnSaveImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				// Allow user to choose path
 				Main.image_decrypt_path = ImageFunctions.GetPathName();
 				Main.normal_size_decrypted_path = Main.image_decrypt_path;
 				
+				// Format save string name
 				Main.image_decrypt_path += ".png";
 				Main.normal_size_decrypted_path += "_normal_size.png";
 				
-				
+				// Attempt to create an output file
 				try{
 					Main.image_decrypt_file = new File(Main.image_decrypt_path);
 					Main.normal_size_decrypted_file = new File(Main.normal_size_decrypted_path);
@@ -160,6 +168,7 @@ public class DecryptPage extends JFrame {
 			}
 		});
 		
+		// Convert encrypted images into decrypted output
 		JButton btnDecrypt = new JButton("Decrypt");
 		btnDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -171,17 +180,12 @@ public class DecryptPage extends JFrame {
 				// Save the decrypted image
 				ImageFunctions.Save(Main.decrypt_image, Main.image_decrypt_file);
 
+				// Create, display, and save scaled image (same size as original image
 				Main.normal_size_decrypted_image = ImageFunctions.Shrink(Main.decrypt_image);
-				ImageFunctions.Display_Image(Main.normal_size_decrypted_image, "Regular Sized Decrypted Image");
-				
+				ImageFunctions.Display_Image(Main.normal_size_decrypted_image, "Regular Sized Decrypted Image");				
 				ImageFunctions.Save(Main.normal_size_decrypted_image, Main.normal_size_decrypted_file);
-				
-
-				
-				
 			}
 		});
-		
 		GridBagConstraints gbc_btnDecrypt = new GridBagConstraints();
 		gbc_btnDecrypt.fill = GridBagConstraints.BOTH;
 		gbc_btnDecrypt.insets = new Insets(0, 50, 0, 50);
