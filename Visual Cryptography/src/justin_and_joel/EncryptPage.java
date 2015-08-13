@@ -48,10 +48,14 @@ import javax.swing.JCheckBox;
 
 public class EncryptPage extends JFrame {
 	
-	static final int BLACK = -16777216;
-	static final int WHITE = -1;
-	private boolean imageFlag;
-	private boolean textFlag;
+	private static final long serialVersionUID = 1L;
+	
+	static final int BLACK = -16777216;  // Constant to represent the RGB binary value of black. In binary - 1111111 00000000 00000000 00000000
+	static final int WHITE = -1;  // Constant to represent the RGB binary value of white. In binary - 1111111 1111111 1111111 1111111
+	private boolean imageFlag;  // Flag used to track state of image radio button
+	private boolean textFlag;  // Flag used to track state of text radio button
+	
+	// GUI control declarations
 	JRadioButton rdbtnImage;
 	JRadioButton rdbtnText;
 	JButton btnOriginal;
@@ -59,7 +63,6 @@ public class EncryptPage extends JFrame {
 	JTextArea textArea;
 	JButton btnEncrypt;
 	JButton btnClear;
-
 	private JPanel contentPane;
 
 	/**
@@ -86,6 +89,7 @@ public class EncryptPage extends JFrame {
 		imageFlag = false;
 		textFlag = false;
 		
+		// Create encryption page Jpanel  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -93,6 +97,7 @@ public class EncryptPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Title of encryption page
 		JLabel lblTitle = new JLabel("Create Encrypted Images");
 		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		lblTitle.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -106,32 +111,37 @@ public class EncryptPage extends JFrame {
 		Original_Path_Name.setBounds(147, 64, 291, 30);
 		contentPane.add(Original_Path_Name);
 		
+		// Label next to Save Image button that displays selected save path
 		final JLabel Save_Path_Name = new JLabel("No Save Path Selected");
 		Save_Path_Name.setBounds(147, 97, 291, 30);
 		contentPane.add(Save_Path_Name);
 		
+		// Check box to allow output to include printer friendly copies
 		final JCheckBox chckbxIncludePrintFriendly = new JCheckBox("Add Print Friendly Copy");
 		chckbxIncludePrintFriendly.setBounds(232, 256, 206, 23);
 		contentPane.add(chckbxIncludePrintFriendly);
 		
+		// Radio button that indicates input from an image file
 		rdbtnImage = new JRadioButton("Image");
 		rdbtnImage.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e) {
 				imageFlag = true;
 				textFlag = false;
-				System.out.println("imageFlag is: "+ imageFlag);
+				
+				//System.out.println("imageFlag is: "+ imageFlag);   // Print debug statement
 				rdbtnText.setSelected(false);
 			}
 		});
 		rdbtnImage.setBounds(8, 35, 85, 23);
 		contentPane.add(rdbtnImage);
 		
+		// Radio button that indicates input from an image file
 		rdbtnText = new JRadioButton("Text");	
 		rdbtnText.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
 				imageFlag = false;
 				textFlag = true;
-				System.out.println("imageFlag is: " + imageFlag);
+				//System.out.println("imageFlag is: " + imageFlag);  // Print debug statement
 				rdbtnImage.setSelected(false);
 			}
 		});
