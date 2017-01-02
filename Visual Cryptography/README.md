@@ -40,11 +40,4 @@ http://users.telenet.be/d.rijmenants/en/visualcrypto.htm
 
 http://www.datagenetics.com/blog/november32013/
 
-
-This project was created using the Eclipse Luna IDE.  The Multiplatform IDE can be found here:
-
-https://eclipse.org/
-
-A quickstart guide on how to pull down and build this repository within Eclipse can be found here:
-
-http://www.vogella.com/tutorials/EclipseGit/article.html
+ This project can be built with maven following the instructions below:
