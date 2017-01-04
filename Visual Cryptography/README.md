@@ -39,5 +39,3 @@ Below are several links to sites for more details about the visual cryptography 
 http://users.telenet.be/d.rijmenants/en/visualcrypto.htm
 
 http://www.datagenetics.com/blog/november32013/
-
- This project can be built with maven following the instructions below:
