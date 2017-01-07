@@ -43,8 +43,7 @@ public class EncryptPage extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	static final int BLACK = -16777216;  // Constant to represent the RGB binary value of black. In binary - 1111111 00000000 00000000 00000000
-	static final int WHITE = -1;  // Constant to represent the RGB binary value of white. In binary - 1111111 1111111 1111111 1111111
+
 	private boolean imageFlag;  // Flag used to track state of image radio button
 	private boolean textFlag;  // Flag used to track state of text radio button
 	
@@ -263,58 +262,23 @@ public class EncryptPage extends JFrame {
 				Main.save_cipher_magnified_path = Main.save_path + "_cipher_magnified.png";
 				Main.key_magnified_file = new File(Main.save_key_magnified_path);
 				Main.cipher_magnified_file = new File(Main.save_cipher_magnified_path);
-				
-				// Create Black and White image from original image
-				BufferedImage black_white = new BufferedImage(
-				        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
-				        BufferedImage.TYPE_BYTE_BINARY);
-				Graphics2D graphics = black_white.createGraphics();
-				graphics.drawImage(Main.originalImage, 0, 0, null);
 
-				// Save and display black and white image file
-				Main.bw_file = new File(Main.save_path + ".png");
-				ImageFunctions.Save(black_white, Main.bw_file);
-				ImageFunctions.Display(Main.bw_file, "Original B/W");
-				
-				// Create image key
-				BufferedImage key_image = new BufferedImage(
-				        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
-				        BufferedImage.TYPE_BYTE_BINARY);
-				
-				// Generate a random key
-				Random rand = new Random();
-				try {
-					SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG");
-					
-					for(int i = 0; i < key_image.getHeight(); i++){
-						for(int j = 0; j < key_image.getWidth(); j++){
-							
-							int result = secureRandomGenerator.nextInt(100);
-							if(result < 50){
-								key_image.setRGB(j, i, WHITE);
-							}
-							else{
-								key_image.setRGB(j, i, BLACK);
-							}
-						}
-					}
-				} catch (NoSuchAlgorithmException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-				// Save and display key image file					
-				ImageFunctions.Display_Image(key_image, "Key");
-				ImageFunctions.Save(key_image, Main.key_file);
+
+				//Start the encryption
+                Encrypt newEncrypt = new Encrypt(Main.originalImage);
+				// Save and display key image file
+				ImageFunctions.Display_Image(newEncrypt.getKeyImage(), "Key");
+				ImageFunctions.Save(newEncrypt.getKeyImage(), Main.key_file);
 				
 				// Save and display magnified key image file
-				BufferedImage magnified_key_image = ImageFunctions.Magnify(key_image);
+				BufferedImage magnified_key_image = ImageFunctions.Magnify(newEncrypt.getKeyImage());
 				ImageFunctions.Save(magnified_key_image, Main.key_magnified_file);
 				ImageFunctions.Display_Image(magnified_key_image, "Magnified key");
 				
 				// Save and display magnified cipher image file
-				Main.cipher_image = ImageFunctions.Create_Cipher(black_white, key_image);
+
+				Main.cipher_image = newEncrypt.createCipher();
+
 				BufferedImage magnified_cipher_image = ImageFunctions.Magnify(Main.cipher_image);
 				ImageFunctions.Save(magnified_cipher_image, Main.cipher_magnified_file);
 				ImageFunctions.Display_Image(magnified_cipher_image, "Magnified Cipher");
@@ -323,7 +287,7 @@ public class EncryptPage extends JFrame {
 				if (chckbxIncludePrintFriendly.isSelected()) {
 					//System.out.println("The printer friendly check box is selected, outputting printer sized pics");  // Print debugging statement
 					
-					BufferedImage print_ready_test = ImageFunctions.make_print_friendly(black_white);
+					BufferedImage print_ready_test = ImageFunctions.make_print_friendly(newEncrypt.getBwImage());
 					ImageFunctions.Display_Image(print_ready_test, "Print Ready");
 					
 					BufferedImage print_ready_key = ImageFunctions.make_print_friendly(magnified_key_image);
