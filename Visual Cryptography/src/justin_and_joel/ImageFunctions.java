@@ -98,29 +98,7 @@ public class ImageFunctions {
 		}
 	}
 	
-	// Converts original image into a cipher image using the key
-	public static BufferedImage Create_Cipher(BufferedImage original, BufferedImage key){
-		
-		BufferedImage cipher_image = new BufferedImage(
-		        Main.originalImage.getWidth(), Main.originalImage.getHeight(),
-		        BufferedImage.TYPE_BYTE_BINARY);
 
-		// For every pixel in the original image, do the following:
-		// 1. If the key pixel is black, flip the color of the original image and store in  cipher at identical location
-		// 2. If the key pixel is white, set the cipher pixel to the same color as the original image
-		for( int i = 0; i<cipher_image.getHeight(); i++){
-			for(int j = 0; j<cipher_image.getWidth(); j++){
-				if(key.getRGB(j, i) == BLACK){
-					int temp = Get_and_Flip(original, i, j);
-					cipher_image.setRGB(j, i, temp);
-				}
-				else{
-					cipher_image.setRGB(j, i, original.getRGB(j, i));
-				}
-			}
-		}
-		return cipher_image;
-	}
 	
 	// Convert a regular sized image into an image doubled in size.
 	// Every original pixel will be converted into a 2x2 square as follows:
@@ -191,7 +169,7 @@ public class ImageFunctions {
 	}
 	
 	// Get the color of a particular bit and return the inverse of that color
-	public static int Get_and_Flip(BufferedImage img, int i, int j){
+	public static int getAndFlip(BufferedImage img, int i, int j){
 		
 		int initial = img.getRGB(j, i);
 		
