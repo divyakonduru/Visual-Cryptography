@@ -6,9 +6,9 @@ This project is licensed under the MIT License
 
 For licensing information refer to LICENSE.md
 
-Justin Blackmon contact: blackmon.justin@gmail.com, 
+Justin Blackmon contact: blackmon (dot) justin (at) gmail (dot) com, 
 
-Joel Bush contact: bush2@pdx.edu
+Joel Bush contact: bush2 (at) pdx (dot) edu
 
 This project is a Java application that utilizes visual cryptography techniques to encrypt and decrypt 
 
