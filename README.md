@@ -1,4 +1,4 @@
-Visual Cryptography Project
+#Visual Cryptography Project
 
 Copyright (c) 2015 Justin Blackmon and Joel Bush
 
