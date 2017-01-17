@@ -1,7 +1,5 @@
 #Visual Cryptography Project
 
-![Visual Cryptography](title.gif "Visual Cryptography")
-
 Copyright (c) 2015 Justin Blackmon and Joel Bush
 
 This project is licensed under the MIT License
